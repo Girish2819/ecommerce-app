@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
         console.error("Error parsing auth data", error);
       }
     }
-  }, [auth?.token]);
+  }, [auth?.user?.name]);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
