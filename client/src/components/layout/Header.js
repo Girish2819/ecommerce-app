@@ -79,11 +79,7 @@ const Header = () => {
   </>
 )}
 
-         <li className="nav-item">
-          <NavLink to="/Cart" className="nav-link" href="#">
-          Cart(0)
-          </NavLink>
-        </li>
+       
         
       </ul>
       
