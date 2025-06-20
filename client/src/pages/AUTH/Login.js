@@ -31,16 +31,20 @@ const Login = () => {
         });
 
         // ✅ Save to localStorage
-        localStorage.setItem("auth", JSON.stringify(res.data));
+         localStorage.setItem("auth", JSON.stringify({
+        user: res.data.user,
+        token: res.data.token,
+      }));
+
+      axios.defaults.headers.common["Authorization"] = res.data.token;
 
         // ✅ Redirect based on role
-        const Login = () => {
-  const currentLocation = useLocation();
-
-  // later in code
-  navigate(currentLocation.state || "/");
-}
+         if (res.data.user.role === 1) {
+        navigate('/dashboard/admin');
+      } else {
+        navigate('/dashboard/user');
       }
+    }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
