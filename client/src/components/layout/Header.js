@@ -63,7 +63,7 @@ const Header = () => {
       <ul className="dropdown-menu">
         <li>
           <NavLink
-            to={auth?.user?.role === 1 ? "/dashboard/admin" : "/dashboard/user"}
+            to={`/dashboard/${auth?.user?.role === 1 ? 'admin' : 'user'}`}
             className="dropdown-item"
           >
             Dashboard
