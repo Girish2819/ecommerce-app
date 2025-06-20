@@ -23,7 +23,9 @@ const Policy = () => {
           <p className="mt-3">
             For any queries or concerns, please feel free to contact our customer support team. We are here to assist you 24/7.
           </p>
-          
+          <p className="mt-3">
+            Thank you for choosing us for your shopping needs. We look forward to serving you with the best products and services!
+          </p>
         </div>
       </div>
     </Layout>
