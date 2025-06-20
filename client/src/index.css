@@ -106,8 +106,8 @@
   flex-direction: column;
 }
 
-/* ===================
-for register page and login page styling ================ */
+/* 
+for register page and login page styling  */
 .form-container{
   display: flex;
   align-items: center;
@@ -116,8 +116,7 @@ for register page and login page styling ================ */
   flex-direction: column;
 
 }
-/* ===================================
-========= register page  */
+/* register page  */
 .form-container{
   display: flex;
   align-items: center;
