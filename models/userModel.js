@@ -28,7 +28,7 @@ answer: {
     required: true
   },
 role:{
-    type:Number,
+    type: String,
     default:0,
 }
 }, { timestamps: true }
