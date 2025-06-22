@@ -38,7 +38,6 @@ import JWT from "jsonwebtoken";
     }
     //register user 
     const hashedPassword= await hashPassword(password)
-    // save 
     const user = await new userModel({
         name, 
         email,
@@ -98,6 +97,7 @@ import JWT from "jsonwebtoken";
                 success:true,
                 message:'Login Successfully',
                 user:{
+                    _id: user._id,
                     name:user.name,
                     email:user.email,
                     phone:user.phone,

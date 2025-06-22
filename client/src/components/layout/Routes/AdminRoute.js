@@ -1,48 +1,54 @@
-import { useEffect,useState } from "react"; 
+import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/Auth";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import axios from "axios";
-import Spinners from "../Spinners"; // Importing a spinner component for loading state
+import Spinners from "../Spinners";
 
+export default function AdminRoute() {
+  const [ok, setOk] = useState(false);
+  const { auth, setAuth } = useAuth();
 
+  useEffect(() => {
+    const authCheck = async () => {
+      try {
+        const res = await axios.get('/api/v1/auth/admin-auth', {
+          headers: {
+            Authorization: auth?.token,
+          },
+        });
 
+        //  Check if response is ok and user is admin
+        if (res.data.ok && res.data.user?.role === 1) {
+          setOk(true);
 
-export default function AdminRoute(){
-    const [ok, setOk] = useState(false);
-    const {auth, setAuth} = useAuth()
-    useEffect(() => {
-        const authcheck = async () => {
-        try {
-    const res = await axios.get('/api/v1/auth/admin-auth', {
-      headers: {
-        Authorization: auth?.token
-      }
-    });
-        if (res.data.ok) {
-            setOk(true);
-            setAuth({
+          // Update auth with user info
+          const updatedAuth = {
             ...auth,
             user: res.data.user,
-            token: auth?.token // keep the same token
-      });
-      localStorage.setItem("auth", JSON.stringify({
-        ...auth,
-        user: res.data.user
-      }));
+          };
+
+          setAuth(updatedAuth);
+          localStorage.setItem("auth", JSON.stringify(updatedAuth));
+        } else {
+          setOk(false);
+        }
+      } catch (err) {
+        console.log("Admin Auth check failed:", err);
+        setOk(false);
+      }
+    };
+
+    if (auth?.token) {
+      authCheck();
     } else {
       setOk(false);
- }
-    } catch (err) {
-    setOk(false);
-    console.log("Auth check error", err);
-  }
-};
-        if (auth?.token) {
-    authcheck();
-  } else {
-    setOk(false); // If no token, redirect to login via spinner
-  }
-    }, [auth ?.token]);
-    return ok ? <Outlet/> :<Spinners path=""/>;
+    }
+  }, [auth?.token]);
 
+  //  Render based on check
+  if (!auth?.token) {
+    return <Navigate to="/login" />;
+  }
+
+  return ok ? <Outlet /> : <Spinners path="" />;
 }

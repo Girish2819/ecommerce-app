@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
           token: parsedData.token || "",
         });
         //default axios headers
-        axios.defaults.headers.common["Authorization"] = auth?.token
+        axios.defaults.headers.common["Authorization"] = parsedData.token;
 
       } catch (error) {
         console.error("Error parsing auth data", error);

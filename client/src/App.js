@@ -19,12 +19,15 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/dashboard" element={<PrivateRoute/>}>
-           <Route path="user" element={<Dashboard/>} />
-      </Route>
-      <Route path="/dashboard" element={<AdminRoute/>}>
-           <Route path="admin" element={<AdminDashboard/>} />
-      </Route>
+     <Route path="/dashboard">
+       <Route element={<PrivateRoute />}>
+    <Route path="user" element={<Dashboard />} />
+       </Route>
+       <Route element={<AdminRoute />}>
+    <Route path="admin" element={<AdminDashboard />} />
+       </Route>
+     </Route>
+
       <Route path="/Register" element={<Register/>} />
       <Route path="/forgot-Password" element={<ForgotPassword/>} />
       <Route path="/Login" element={<Login/>} />
