@@ -5,7 +5,8 @@ import Layout from "../../components/layout/Layout";
 
 
 const AdminDashboard = () => {
-  const [auth] = useAuth();
+  const {auth} = useAuth();
+  console.log("Admin Dashboard auth:", auth);
   return (
     <Layout>
       <div className="container-fluid">

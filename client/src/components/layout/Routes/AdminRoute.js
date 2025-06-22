@@ -7,7 +7,7 @@ import Spinners from "../Spinners";
 export default function AdminRoute() {
   const [ok, setOk] = useState(false);
   const { auth, setAuth } = useAuth();
-
+  console.log('AdminRoute auth:', auth);
   useEffect(() => {
     const authCheck = async () => {
       try {
@@ -18,18 +18,20 @@ export default function AdminRoute() {
         });
 
         //  Check if response is ok and user is admin
-        if (res.data.ok && res.data.user?.role === 1) {
+        console.log("Admin Auth check response:", res.data);
+        if (res.data.ok) {
           setOk(true);
-
+          // console.log("Admin Auth check successful:", res.data.user);
           // Update auth with user info
-          const updatedAuth = {
-            ...auth,
-            user: res.data.user,
-          };
+          // const updatedAuth = {
+          //   ...auth,
+          //   user: res.data.user,
+          // };
 
-          setAuth(updatedAuth);
-          localStorage.setItem("auth", JSON.stringify(updatedAuth));
+          // setAuth(updatedAuth);
+          // localStorage.setItem("auth", JSON.stringify(updatedAuth));
         } else {
+          // console.log("Admin Auth check failed: User is not an admin");
           setOk(false);
         }
       } catch (err) {
@@ -49,6 +51,6 @@ export default function AdminRoute() {
   if (!auth?.token) {
     return <Navigate to="/login" />;
   }
-
+  // console.log('AdminRoute ok:', ok);
   return ok ? <Outlet /> : <Spinners path="" />;
 }
