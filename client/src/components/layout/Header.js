@@ -13,6 +13,7 @@ const Header = () => {
     localStorage.removeItem("auth");  // Clear auth data from local storag
     toast.success("Logout Successfully"); // Show success notification
   }
+  // console.log("i'm from header.js",auth===undefined, auth?.user?.role);
   return (
     <>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -63,7 +64,7 @@ const Header = () => {
       <ul className="dropdown-menu">
         <li>
           <NavLink
-            to={`/dashboard/${auth?.user?.role === 1 ? 'admin' : 'user'}`}
+            to={`/dashboard/${auth?.user?.role === "1" ? 'admin' : 'user'}`}
             className="dropdown-item"
           >
             Dashboard

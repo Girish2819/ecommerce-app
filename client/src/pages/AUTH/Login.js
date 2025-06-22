@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
+  console.log("Login auth:", auth);
 
   //  Handle form submission
   const handleSubmit = async (e) => {
@@ -39,7 +40,7 @@ const Login = () => {
       axios.defaults.headers.common["Authorization"] = res.data.token;
 
         // ✅ Redirect based on role
-         if (res.data.user.role === 1) {
+         if (res.data.user.role === "1") {
         navigate('/dashboard/admin');
       } else {
         navigate('/dashboard/user');
