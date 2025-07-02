@@ -4,7 +4,7 @@ import fs from "fs";
 
 export const createProductController = async (req, res) => {
     try {
-        const  { name, description, price, category, quantity, shipping } = req.fields;
+        const  { name, description, price, category, quantity } = req.fields;
         const { photo } = req.files;
         //validation
         switch (true) {
@@ -43,10 +43,28 @@ export const createProductController = async (req, res) => {
         res.status(500).send({
             success: false,
             message: "Error in creating product",
-            error,
+            error:error.message,
         });
     }
 };
     
+// ger products
+export const getProductController = async (req, res) => {
+    try {
+        const products = await productModel.find({}).populate("category").select("-photo").limit(12).sort({ createdAt: -1 });
+        res.status(200).send({
+            success: true,
+            message: " All Products ",
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error in fetching products",
+            error: error.message,
+        });
+    }
+};
 
 
