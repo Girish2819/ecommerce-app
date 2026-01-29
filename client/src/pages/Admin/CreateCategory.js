@@ -4,11 +4,15 @@ import AdminMenu from '../../components/layout/AdminMenu'
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import CategoryForm from '../../components/form/CategoryForm';
+import { Modal } from 'antd';
 
 
 const CreateCategory = () => {
   const[categories, setCategories] = useState([]);
   const[name,setName]=useState("");
+  const[visible,setVisible]=useState(false);
+  const[selected,setSelected]=useState(null);
+  const[updatedName,setUpdatedName]=useState("");
   // handle form
   const handleSubmit=async(e)=>{
     e.preventDefault()
@@ -71,15 +75,33 @@ const CreateCategory = () => {
               <tbody>
   
                 {categories?.map((c) => (
-                  <tr key={c._id}>
-                    <td>{c.name}</td>
-                    <td><button className="btn btn-primary">edit</button></td>
+                  <>
+                  <tr>
+                    
+                    <td key={c._id}>{c.name}</td>
+                    <td>
+                      <button className="btn btn-primary ms-2" 
+                      onClick={()=> {setVisible(true) ; setUpdatedName(c.name)}}>
+                        edit
+                        </button>
+                      <button className="btn btn-dander ms-2">Delete</button>
+                      </td>
                   </tr>
+                  </>
                 ))}
               </tbody>
             </table>
 
                  </div>
+                 <Modal
+                 onCancel={()=>setVisible(false)}
+                  footer={null} 
+                  visible={visible}>
+                  <CategoryForm
+                  value={updatedName}
+                  setValue={setUpdatedName}
+                  />  
+                 </Modal>
             </div>
         </div>   
         </div>
