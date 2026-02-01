@@ -47,6 +47,27 @@ const CreateCategory = () => {
   useEffect(() => {
     getAllCategories();
   }, []);
+
+
+  const handleUpdate=async(e)=>{  
+    e.preventDefault();
+     if (!selected?._id) return;
+    try{
+      const {data}=await axios.put(`/api/v1/category/update-category/${selected._id}`,{name:updatedName})
+      if(data?.success){
+        toast.success(`${updatedName} is updated`)
+        setSelected(null);
+        setUpdatedName("");
+        setVisible(false);
+        getAllCategories();
+      }else{
+        toast.error(data.message)
+      }
+    }catch(error){
+      console.log(error)
+      toast.error("something went wrong while updating category")
+    }
+  }
   return (
     <Layout Title={"Dashboard - Create Category"}>
         <div className="container-fluid m-3 p-3">
@@ -74,32 +95,39 @@ const CreateCategory = () => {
               </thead>
               <tbody>
   
-                {categories?.map((c) => (
-                  <>
-                  <tr>
-                    
-                    <td key={c._id}>{c.name}</td>
-                    <td>
-                      <button className="btn btn-primary ms-2" 
-                      onClick={()=> {setVisible(true) ; setUpdatedName(c.name)}}>
-                        edit
-                        </button>
-                      <button className="btn btn-dander ms-2">Delete</button>
-                      </td>
-                  </tr>
-                  </>
-                ))}
+         {categories?.map((c) => (
+  <tr key={c._id}>
+    <td>{c.name}</td>
+    <td>
+      <button
+        className="btn btn-primary ms-2"
+        onClick={() => {
+        setSelected(c);        
+          setVisible(true);
+          setUpdatedName(c.name);
+        }}
+      >
+        edit
+      </button>
+
+      <button className="btn btn-danger ms-2">Delete</button>
+    </td>
+  </tr>
+))}
+
               </tbody>
             </table>
 
                  </div>
                  <Modal
+                  open={visible}
                  onCancel={()=>setVisible(false)}
                   footer={null} 
-                  visible={visible}>
+                  >
                   <CategoryForm
                   value={updatedName}
                   setValue={setUpdatedName}
+                  handleSubmit={handleUpdate}
                   />  
                  </Modal>
             </div>
