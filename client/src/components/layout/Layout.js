@@ -5,8 +5,7 @@ import {Helmet} from 'react-helmet'
 import { Toaster } from 'react-hot-toast';
   
 
-
-const Layout = ({children, Title ,description, keywords, author}) => {
+const Layout = ({children, title ,description, keywords, author}) => {
   return (
     <div>
        <Helmet>
@@ -14,7 +13,7 @@ const Layout = ({children, Title ,description, keywords, author}) => {
            <meta name="description" content={description} />
            <meta name="keywords" content={keywords} />
            <meta name="author" content={author} />
-           <title>{Title}</title>
+           <title>{title}</title>
         </Helmet>
      <Header />
      <main style={{minHeight: "75vh"}}>
