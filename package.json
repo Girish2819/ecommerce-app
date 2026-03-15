@@ -15,6 +15,7 @@
   "license": "RGIPT",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "braintree": "^3.36.0",
     "colors": "^1.4.0",
     "concurrently": "^9.1.2",
     "cors": "^2.8.5",
