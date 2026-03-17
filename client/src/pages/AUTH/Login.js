@@ -10,8 +10,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { auth, setAuth } = useAuth();
-  console.log("Login auth:", auth);
+  const [ auth, setAuth ] = useAuth();
+  const location = useLocation();
 
   //  Handle form submission
   const handleSubmit = async (e) => {
@@ -37,14 +37,10 @@ const Login = () => {
         token: res.data.token,
       }));
 
-      axios.defaults.headers.common["Authorization"] = res.data.token;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
-        // ✅ Redirect based on role
-         if (res.data.user.role === "1") {
-        navigate('/dashboard/admin');
-      } else {
-        navigate('/dashboard/user');
-      }
+        // ✅ Redirect back to intended page (if any), else Home
+        navigate(location?.state || "/");
     }
     } catch (error) {
       console.log(error);

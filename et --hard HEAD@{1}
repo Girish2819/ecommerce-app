@@ -1,0 +1,76 @@
+[33mb8e06ac[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33mde3b3eb[m HEAD@{1}: reset: moving to HEAD~1
+[33m67ed89f[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{2}: commit: payment integrated sucessfully
+[33mde3b3eb[m HEAD@{3}: commit: cart page created and working fine - next will be payment integration
+[33mb8e06ac[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{4}: commit: search bar created and working fine 22
+[33m61f1786[m HEAD@{5}: reset: moving to HEAD
+[33m61f1786[m HEAD@{6}: commit: home page created and working fine
+[33m4c60bff[m HEAD@{7}: commit: update and delete functionallity is added and there is one problem that shipping value is not change to no complete 20
+[33m4cd5c4b[m HEAD@{8}: commit: create product working fine 19done
+[33m8d6df8c[m HEAD@{9}: commit: updated 18 final
+[33m2492135[m HEAD@{10}: commit: updated correct
+[33mf76a233[m HEAD@{11}: commit: some changes is done in createcatogory
+[33maafd539[m HEAD@{12}: commit: create category page is not work properly and there is another issue that when loggin with admin after reffreshing page it renders to login page
+[33mb24af73[m HEAD@{13}: commit: the update , delete ,single product all routes are checked all are works nicely without error
+[33m2834cd5[m HEAD@{14}: commit: routes are created get products
+[33mf641a92[m HEAD@{15}: commit: product crude operation is going on and controller page created route is created and models is also created
+[33m9ca9df2[m HEAD@{16}: commit: category api crud done in this get put post and delete route created and tested succesfully by postman
+[33m927b260[m HEAD@{17}: commit: category routes are updated caregoryCotrollers and categoryModel.js are created and updated successfully and slugify installed for on the place of space - is used auto after installation
+[33m8e48a94[m HEAD@{18}: commit: till 15 completed and no errors till now
+[33mfc14d6d[m HEAD@{19}: commit: admin is clear no error but in user dashboard there is some issue
+[33mf22cf81[m HEAD@{20}: commit: admin dashboard updateda
+[33m37b2593[m HEAD@{21}: commit: admin menu page updated
+[33m65e099f[m HEAD@{22}: commit: in models role type is number
+[33m605beba[m HEAD@{23}: pull origin main: Fast-forward
+[33mb1a3c42[m HEAD@{24}: commit: ....
+[33m0a78e14[m HEAD@{25}: commit: ....
+[33mb15371b[m HEAD@{26}: reset: moving to HEAD
+[33mb15371b[m HEAD@{27}: reset: moving to HEAD
+[33mb15371b[m HEAD@{28}: commit: the error is not fixed yet
+[33me81d612[m HEAD@{29}: commit: here is some updated code and the dashboeard error not fixed yet that when i loggin it redirects to user dashbord
+[33m118e6f6[m HEAD@{30}: commit: .....
+[33m4770ff7[m HEAD@{31}: commit: .....
+[33m8bd22b4[m HEAD@{32}: commit: .....
+[33m01b0a22[m HEAD@{33}: commit: .....
+[33m7e49d47[m HEAD@{34}: commit: admin route defined
+[33m2d0a507[m HEAD@{35}: pull origin main: Fast-forward
+[33md5c0014[m HEAD@{36}: checkout: moving from main to main
+[33md5c0014[m HEAD@{37}: commit: ....
+[33m3e9c66e[m HEAD@{38}: commit: drop down menu has some issue and dashboard page rerndering has some issue
+[33m4d1c20d[m HEAD@{39}: pull --rebase origin main (finish): returning to refs/heads/main
+[33m4d1c20d[m HEAD@{40}: pull --rebase origin main (pick): admin route created
+[33me90a6ed[m HEAD@{41}: pull --rebase origin main (start): checkout e90a6ed414fccdfc00b00ce60737c9fae28785c3
+[33m18d3a72[m HEAD@{42}: commit: admin route created
+[33mb040b73[m HEAD@{43}: reset: moving to b040b73e620e79f218407e7d4eebb0ae9263c526
+[33mb040b73[m HEAD@{44}: reset: moving to b040b73e620e79f218407e7d4eebb0ae9263c526
+[33me90a6ed[m HEAD@{45}: commit: drop down menu added there is some error i will fix it soon
+[33mb040b73[m HEAD@{46}: reset: moving to b040b73e620e79f218407e7d4eebb0ae9263c526
+[33mb040b73[m HEAD@{47}: reset: moving to b040b73e620e79f218407e7d4eebb0ae9263c526
+[33mb040b73[m HEAD@{48}: reset: moving to b040b73e620e79f218407e7d4eebb0ae9263c526
+[33mb040b73[m HEAD@{49}: commit: all errors are fixed now there is no issue in code , forgot password is set successfully
+[33m973e847[m HEAD@{50}: commit: in forgot password it shows somthing went error
+[33ma5f835d[m HEAD@{51}: commit: there is some issue in forgot password i will fix it soon
+[33mfeef0a8[m HEAD@{52}: commit: there is some issue in forgot password i will fix it soon
+[33m9d83ca4[m HEAD@{53}: commit: forgot password route created and tested , successfully running
+[33mcfa4095[m HEAD@{54}: commit: dashboard page fix when we login to dashboard it directly redirect at dashboard and simply we login it redirect to homepage
+[33m3a65914[m HEAD@{55}: commit: logout nav created and all errors are fixed also private route created and dashboard created
+[33m6f0d2f1[m HEAD@{56}: commit: line 17 to 30 has to be recheck
+[33m1b0120c[m HEAD@{57}: commit: some error in auth js , it will fix soon
+[33m53a8d9e[m HEAD@{58}: commit: some changes are done today in web page
+[33m2ec5aad[m HEAD@{59}: commit: work on context api with logout , auth.js file created in context and context file created in src
+[33md9b8375[m HEAD@{60}: commit: login page and register page created successfully and it works nice also toast msg works
+[33ma352ab8[m HEAD@{61}: commit: connect frontend and backend , and fixed tosed notification
+[33mf0f1992[m HEAD@{62}: commit: react helmet download and seos perform in every page
+[33m6730bbd[m HEAD@{63}: commit: about and policy page updated
+[33m21de6a5[m HEAD@{64}: commit: contact page updated
+[33m4caa950[m HEAD@{65}: commit: a simple error fixed
+[33md0474c3[m HEAD@{66}: commit: footer designed successfully
+[33me8db32d[m HEAD@{67}: commit: nav bar updated and favicon change
+[33m3991de7[m HEAD@{68}: commit: pages are added, components are created and routes are created
+[33mbbc9ce8[m HEAD@{69}: commit: client folder created as react
+[33m55e7321[m HEAD@{70}: commit: admin middleware added
+[33m9840aab[m HEAD@{71}: commit: add middleware and fix some errors also use tocken
+[33m56bab75[m HEAD@{72}: commit: login api added
+[33m1460ea2[m HEAD@{73}: commit: Rename folder 'models ' to 'models' to fix folder name with trailing space
+[33m7451080[m HEAD@{74}: Branch: renamed refs/heads/master to refs/heads/main
+[33m7451080[m HEAD@{76}: commit (initial): Adding ECOMMERCE-APP to git hub

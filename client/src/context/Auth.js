@@ -9,6 +9,8 @@ const AuthProvider = ({ children }) => {
     token: "",
   });
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const data = localStorage.getItem("auth");
 
@@ -16,21 +18,28 @@ const AuthProvider = ({ children }) => {
       try {
         const parsedData = JSON.parse(data);
 
-        setAuth({
-          user: parsedData.user || null,
-          token: parsedData.token || "",
-        });
+        const user = parsedData?.user || null;
+        const token = parsedData?.token || "";
 
-        axios.defaults.headers.common["Authorization"] = parsedData.token;
+        setAuth({ user, token });
+
+        // ✅ ONLY set header if token exists
+        if (token) {
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        } else {
+          delete axios.defaults.headers.common["Authorization"];
+        }
 
       } catch (error) {
         console.error("Error parsing auth data", error);
       }
     }
+
+    setLoading(false);
   }, []);
 
   return (
-    <AuthContext.Provider value={[auth, setAuth]}>
+    <AuthContext.Provider value={[auth, setAuth, loading]}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,45 +1,57 @@
 import JWT from "jsonwebtoken";
-import {registerController} from '../controllers/authController.js';
-import userModel from "../models/userModel.js";
-//protecting routes token base 
-export const requireSignIn=async (req, res, next) => {
-   try{
-     const decode =JWT.verify(req.headers.authorization, process.env.JWT_SECRET);
-    //  console.log("Decoded user:", decode);
-     req.user = decode; // attach user info to request object
-    next();
-   }catch (error) {
-       console.log(error);
-       res.status(401).send({
-           success: false,
-           message: 'Unauthorized Access',
-           error
-       });
-   }
 
+// 🔐 PROTECT ROUTES (require login)
+export const requireSignIn = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    // ❌ No token
+    if (!authHeader) {
+      return res.status(401).send({
+        success: false,
+        message: "No token provided",
+      });
+    }
+
+    // ✅ Extract token (remove "Bearer ")
+    const token = authHeader.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : authHeader;
+
+    // ✅ Verify token
+    const decoded = JWT.verify(token, process.env.JWT_SECRET);
+
+    // attach user data
+    req.user = decoded;
+
+    next();
+  } catch (error) {
+    console.log("JWT ERROR:", error);
+    return res.status(401).send({
+      success: false,
+      message: "Unauthorized Access",
+    });
+  }
 };
 
-// admin access
-export const isAdmin = async (req, res, next) => {
-    try{
-        // console.log("hi we are here",req.user)
-        const user =await userModel.findById(req.user.id)
-        // console.log("User role:", user);
-        if (user.role !== '1') {
-            return res.status(401).send({
-                success: false,
-                message: 'UnAuthorized Access'
-            });
-        } else{
-            next();
-        }
-    }catch (error) {
-        console.log(error);
-        res.status(401).send({
-            success: false,
-             error,
-            message: 'Error in Admin Middleware',
-           
-        });
+// 🛡️ ADMIN ACCESS ONLY
+export const isAdmin = (req, res, next) => {
+  try {
+    // ✅ Check role directly from token
+    if (Number(req.user.role) !== 1) {
+      return res.status(401).send({
+        success: false,
+        message: "Unauthorized Access",
+      });
     }
+
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(401).send({
+      success: false,
+      message: "Error in Admin Middleware",
+      error,
+    });
+  }
 };
