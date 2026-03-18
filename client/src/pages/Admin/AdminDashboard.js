@@ -2,23 +2,37 @@ import React from "react";
 import { useAuth } from "../../context/Auth";
 import AdminMenu from "../../components/layout/AdminMenu";
 import Layout from "../../components/layout/Layout";
+import "../../Styles/AdminDashboard.css";
 
 
 const AdminDashboard = () => {
-  const {auth} = useAuth();
-  console.log("Admin Dashboard auth:", auth);
+  const [auth] = useAuth();
   return (
     <Layout>
-      <div className="container-fluid m-3 p-3">
-        <div className="row">
-          <div className="col-md-3">
-            <AdminMenu/>
+      <div className="admin-dashboard">
+        <div className="admin-container">
+          <div className="dashboard-hero">
+            <h1>Admin Dashboard</h1>
           </div>
-          <div className="col-md-9">
-            <div className ="card w-75 p-3">
-              <h3>Admin Name:{auth?.user?.name}</h3>
-              <h3>Admin Email:{auth?.user?.email}</h3>
-              <h3>Admin Contact:{auth?.user?.phone}</h3>
+
+          <div className="dashboard-layout">
+            <div className="dashboard-panel">
+              <AdminMenu />
+            </div>
+
+            <div className="info-card">
+              <div className="info-row">
+                <div className="info-label">Admin Name</div>
+                <div className="info-value">{auth?.user?.name}</div>
+              </div>
+              <div className="info-row">
+                <div className="info-label">Admin Email</div>
+                <div className="info-value">{auth?.user?.email}</div>
+              </div>
+              <div className="info-row">
+                <div className="info-label">Admin Contact</div>
+                <div className="info-value">{auth?.user?.phone}</div>
+              </div>
             </div>
           </div>
         </div>
