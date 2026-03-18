@@ -1,0 +1,133 @@
+body {
+  background: #f7f3ee;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* PAGE */
+.create-product-page {
+  background: #f7f3ee;
+  min-height: 100vh;
+  padding: 30px 0;
+}
+
+/* LAYOUT */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  position: sticky;
+  top: 20px;
+}
+
+/* FORM CONTAINER */
+.create-product-container {
+  width: 100%;
+}
+
+/* FORM PANEL */
+.create-product-panel {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+.create-product-header h1 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.create-product-header p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+/* FIELD */
+.field-group {
+  margin-bottom: 14px;
+}
+
+.field-label {
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: block;
+  color: #6b7280;
+}
+
+/* INPUT */
+.cp-input,
+.cp-textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fafafa;
+  font-size: 13px;
+}
+
+.cp-textarea {
+  min-height: 90px;
+}
+
+/* GRID */
+.cp-row-2col {
+  display: flex;
+  gap: 10px;
+}
+
+.cp-row-2col > div {
+  flex: 1;
+}
+
+/* UPLOAD */
+.photo-upload-label {
+  display: block;
+  padding: 12px;
+  border: 2px dashed #e5e7eb;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.photo-preview-wrap img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+/* BUTTON */
+.btn-create-product {
+  width: 100%;
+  padding: 10px;
+  background: #c4613a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-create-product:hover {
+  background: #a94e2f;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+}
