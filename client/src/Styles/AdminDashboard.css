@@ -1,0 +1,72 @@
+/* Admin Dashboard – aligned with Homepage/Cart styling */
+
+.admin-dashboard {
+  background: #f4f6f8;
+}
+
+.admin-dashboard .dashboard-hero {
+  background: #1e1c1a;
+  color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-dashboard .dashboard-hero h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.admin-dashboard .dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.admin-dashboard .dashboard-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 18px;
+}
+
+.admin-dashboard .info-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 18px;
+  max-width: 720px;
+}
+
+.admin-dashboard .info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-dashboard .info-row:last-child {
+  border-bottom: none;
+}
+
+.admin-dashboard .info-label {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.admin-dashboard .info-value {
+  color: #111827;
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .admin-dashboard .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+

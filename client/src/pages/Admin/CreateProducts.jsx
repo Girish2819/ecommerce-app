@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
 import "../../Styles/CreateProduct.css";
+import "../../Styles/DashboardShell.css";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
@@ -64,17 +65,19 @@ const CreateProduct = () => {
 
   return (
     <Layout title={"Create Product"}>
-      <div className="create-product-page">
+      <div className="dashboard-shell">
+        <div className="dashboard-hero-full">
+          <div className="hero-inner">
+            <h1>Admin Panel</h1>
+          </div>
+        </div>
 
-        <div className="admin-layout">
-
-          {/* SIDEBAR */}
-          <div className="admin-sidebar">
+        <div className="dashboard-body">
+          <div className="dashboard-sidebar">
             <AdminMenu />
           </div>
 
-          {/* MAIN FORM */}
-          <div className="create-product-container">
+          <div className="dashboard-content">
             <div className="create-product-panel">
 
               <div className="create-product-header">
@@ -189,8 +192,7 @@ const CreateProduct = () => {
               </form>
             </div>
           </div>
-
-        </div>
+      </div>
       </div>
     </Layout>
   );

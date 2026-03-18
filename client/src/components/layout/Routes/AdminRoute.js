@@ -6,9 +6,11 @@ import Spinners from "../Spinners";
 
 export default function AdminRoute() {
   const [ok, setOk] = useState(false);
-  const [ auth, setAuth ] = useAuth();
+  const [auth, setAuth, loading] = useAuth();
   
   useEffect(() => {
+    if (loading) return;
+
     const authCheck = async () => {
       try {
         const res = await axios.get('/api/v1/auth/admin-auth', {
@@ -33,9 +35,12 @@ export default function AdminRoute() {
     } else {
       setOk(false);
     }
-  }, [auth?.token]);
+  }, [auth?.token, loading]);
 
   //  Render based on check
+  if (loading) {
+    return <Spinners path="" />;
+  }
   if (!auth?.token) {
     return <Navigate to="/login" />;
   }
