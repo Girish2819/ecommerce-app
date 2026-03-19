@@ -22,9 +22,12 @@ const HomePage = () => {
   // GET ALL CATEGORIES
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
-      if (data?.success) {
-        setCategories(data?.categories);
+     const { data } = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/category/get-category`
+);
+
+if (data?.success) {
+  setCategories(data?.categories);
       }
     } catch (error) {
       console.log(error);
@@ -34,7 +37,9 @@ const HomePage = () => {
   // GET TOTAL COUNT
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/product/product-count`
+);
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
@@ -45,7 +50,9 @@ const HomePage = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
+);
       setProducts(data.products);
       setLoading(false);
     } catch (error) {
@@ -58,7 +65,9 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
+);
       setProducts((prev) => [...prev, ...data?.products]);
       setLoading(false);
     } catch (error) {
@@ -66,6 +75,8 @@ const HomePage = () => {
       setLoading(false);
     }
   };
+
+  console.log("API:", process.env.REACT_APP_API);
 
   // FILTER HANDLER
   const handleFilter = (value, id) => {
