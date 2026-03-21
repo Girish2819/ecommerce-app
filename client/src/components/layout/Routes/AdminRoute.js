@@ -13,11 +13,14 @@ export default function AdminRoute() {
 
     const authCheck = async () => {
       try {
-        const res = await axios.get('/api/v1/auth/admin-auth', {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`,
-          },
-        });
+       const res = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/auth/admin-auth`,
+  {
+    headers: {
+      Authorization: `Bearer ${auth?.token}`,
+    },
+  }
+);
 
         if (res.data.ok) {
           setOk(true);

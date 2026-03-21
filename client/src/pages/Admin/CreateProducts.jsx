@@ -23,10 +23,12 @@ const CreateProduct = () => {
   const [photo, setPhoto] = useState(null);
 
   const getAllCategory = async () => {
-    try {
-      const { data } = await axios.get("/api/v1/category/get-category");
-      if (data?.success) setCategories(data.categories);
-    } catch (error) {
+   try {
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_API}/api/v1/category/get-category`
+  );
+  if (data?.success) setCategories(data.categories);
+}catch (error) {
       toast.error("Error fetching categories");
     }
   };

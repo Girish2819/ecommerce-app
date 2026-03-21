@@ -14,11 +14,14 @@ export default function PrivateRoute() {
 
     const authcheck = async () => {
       try {
-        const res = await axios.get('/api/v1/auth/user-auth', {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`
-          }
-        });
+        const res = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/auth/user-auth`,
+  {
+    headers: {
+      Authorization: `Bearer ${auth?.token}`,
+    },
+  }
+);
         if (res.data.ok) {
           setOk(true);
         } else {

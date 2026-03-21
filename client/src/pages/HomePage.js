@@ -186,7 +186,7 @@ if (data?.success) {
                     
                     <div className="product-card-img-wrap">
                       <img
-                        src={`/api/v1/product/product-photo/${p._id}`}
+                        src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                         alt={p.name}
                       />
                     </div>
