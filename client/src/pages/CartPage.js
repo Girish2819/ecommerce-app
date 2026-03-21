@@ -38,7 +38,9 @@ const CartPage = () => {
   // GET TOKEN
   const getToken = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/braintree/token");
+     const { data } = await axios.get(
+  `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
+);
       setClientToken(data?.clientToken);
     } catch (error) {
       toast.error("Failed to load payment token");
@@ -106,7 +108,7 @@ const CartPage = () => {
 
                   <div className="cart-item-img-wrap">
                     <img
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                       alt={p.name}
                     />
                   </div>
