@@ -77,19 +77,19 @@ const ProductDetails = () => {
         )}
         <div className="d-flex flex-wrap">
           {relatedProducts?.map((p) => (
-            <div className="card m-2" style={{ width: "18rem" }} key={p._id}>
+            <div className="card m-2" style={{ width: "18rem" }} key={product._id}>
               <img
                 src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p?._id}`}
                 className="card-img-top"
-                alt={p.name}
+                alt={product.name}
               />
               <div className="card-body">
-                <h5 className="card-title">{p.name}</h5>
-                <p className="card-text">{p.description.substring(0, 30)}...</p>
-                <p className="card-text"> $ {p.price}</p>
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.description.substring(0, 30)}...</p>
+                <p className="card-text"> $ {product.price}</p>
                 <button
                   className="btn btn-primary ms-1"
-                  onClick={() => navigate(`/product/${p.slug}`)}
+                  onClick={() => navigate(`/product/${product.slug}`)}
                 >
                   More Details
                 </button>
