@@ -1,0 +1,62 @@
+/* User Dashboard – aligned with Homepage/Cart styling */
+
+.user-dashboard {
+  background: #f4f6f8;
+}
+
+.user-dashboard .dashboard-hero {
+  background: #1a1f2e;
+  color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.user-dashboard .dashboard-hero h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.user-dashboard .dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.user-dashboard .info-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 18px;
+  max-width: 720px;
+}
+
+.user-dashboard .info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.user-dashboard .info-row:last-child {
+  border-bottom: none;
+}
+
+.user-dashboard .info-label {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.user-dashboard .info-value {
+  color: #111827;
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .user-dashboard .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
