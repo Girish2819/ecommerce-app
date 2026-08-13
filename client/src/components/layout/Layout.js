@@ -3,9 +3,10 @@ import Header from './Header'
 import Footer from './Footer'
 import {Helmet} from 'react-helmet'
 import { Toaster } from 'react-hot-toast';
+import ChatWidget from './ChatWidget'
   
 
-const Layout = ({children, title ,description, keywords, author}) => {
+const Layout = ({children, title ,description, keywords, author, currentProduct}) => {
   return (
     <div>
        <Helmet>
@@ -20,7 +21,8 @@ const Layout = ({children, title ,description, keywords, author}) => {
         <Toaster/>
         {children}
      </main>
-    <Footer />
+   <Footer />
+   <ChatWidget product={currentProduct} />
     </div>
 
   )

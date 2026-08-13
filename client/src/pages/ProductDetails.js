@@ -39,7 +39,7 @@ const ProductDetails = () => {
     }
   };
   return (
-    <Layout>
+    <Layout currentProduct={product}>
       <div className="row container mt-2">
         <div className="col-md-6">
           <img
