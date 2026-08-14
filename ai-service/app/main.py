@@ -51,3 +51,5 @@ async def health():
     return {
         "status": "healthy"
     }
+    
+    // Add more routes and functionality as needed
