@@ -90,7 +90,7 @@ const CartPage = () => {
         </div>
 
         <div className="cart-main-container">
-          <div className="layout">
+          <div className="cart-layout">
 
             {/* LEFT - ITEMS */}
             <div>
