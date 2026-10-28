@@ -1,5 +1,20 @@
 # Getting Started with Create React App
 
+<<<<<<< HEAD
+=======
+## AI assistant
+
+The chat widget uses the AI service endpoint at `/api/ai/chat`. In development,
+the Create React App proxy sends this request to `http://localhost:8000`.
+
+For production, set `REACT_APP_AI_API` in the frontend build environment to the
+base URL of the deployed AI service (for example, `https://ai-service.example.com`).
+It appends `/api/ai/chat` automatically. Also configure the AI service's
+`CLIENT_URL` environment variable with the deployed frontend origin so its CORS
+policy allows the request. Rebuild and redeploy the frontend after changing
+`REACT_APP_AI_API`.
+
+>>>>>>> modified/main
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

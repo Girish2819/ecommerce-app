@@ -1,6 +1,10 @@
 import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
 import orderModel from "../models/orderModel.js";
+<<<<<<< HEAD
+=======
+import mongoose from "mongoose";
+>>>>>>> modified/main
 
 import fs from "fs";
 import slugify from "slugify";
@@ -332,6 +336,7 @@ export const braintreeTokenController = async (req, res) => {
   try {
     gateway.clientToken.generate({}, function (err, response) {
       if (err) {
+<<<<<<< HEAD
         res.status(500).send(err);
       } else {
         res.send(response);
@@ -339,6 +344,23 @@ export const braintreeTokenController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+=======
+        console.error("Braintree client token error:", err);
+        res.status(500).send({
+          success: false,
+          message: "Unable to initialize payment. Please try again.",
+        });
+      } else {
+        res.status(200).send(response);
+      }
+    });
+  } catch (error) {
+    console.error("Braintree client token error:", error);
+    res.status(500).send({
+      success: false,
+      message: "Unable to initialize payment. Please try again.",
+    });
+>>>>>>> modified/main
   }
 };
 
@@ -346,6 +368,7 @@ export const braintreeTokenController = async (req, res) => {
 export const brainTreePaymentController = async (req, res) => {
   try {
     const { nonce, cart } = req.body;
+<<<<<<< HEAD
     let total = 0;
     cart.map((i) => {
       total += i.price;
@@ -373,5 +396,87 @@ export const brainTreePaymentController = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
+=======
+    if (
+      typeof nonce !== "string" ||
+      !nonce ||
+      !Array.isArray(cart) ||
+      cart.length === 0
+    ) {
+      return res.status(400).send({
+        success: false,
+        message: "A payment method and at least one cart item are required.",
+      });
+    }
+
+    const productIds = cart.map((item) => item?._id);
+    if (productIds.some((id) => !mongoose.isValidObjectId(id))) {
+      return res.status(400).send({
+        success: false,
+        message: "The cart contains an invalid product.",
+      });
+    }
+
+    const products = await productModel
+      .find({ _id: { $in: productIds } })
+      .select("_id price");
+    const productPrices = new Map(
+      products.map((product) => [product._id.toString(), product.price])
+    );
+    if (products.length !== new Set(productIds.map(String)).size) {
+      return res.status(400).send({
+        success: false,
+        message: "One or more cart products are no longer available.",
+      });
+    }
+
+    const total = productIds.reduce(
+      (sum, id) => sum + productPrices.get(id.toString()),
+      0
+    );
+    if (!Number.isFinite(total) || total <= 0) {
+      return res.status(400).send({
+        success: false,
+        message: "The cart total is invalid.",
+      });
+    }
+
+    const result = await new Promise((resolve, reject) => {
+      gateway.transaction.sale(
+        {
+          amount: total.toFixed(2),
+          paymentMethodNonce: nonce,
+          options: {
+            submitForSettlement: true,
+          },
+        },
+        (error, transactionResult) => {
+          if (error) reject(error);
+          else resolve(transactionResult);
+        }
+      );
+    });
+
+    if (!result.success) {
+      return res.status(400).send({
+        success: false,
+        message: result.message || "The payment was declined.",
+      });
+    }
+
+    await new orderModel({
+      products: productIds,
+      payment: result,
+      buyer: req.user.id,
+    }).save();
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Braintree payment error:", error);
+    return res.status(500).send({
+      success: false,
+      message: "Unable to complete payment. Please try again.",
+    });
+>>>>>>> modified/main
   }
 };

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,11 +99,100 @@
   flex-direction: column;
   justify-content: center; /* Vertical centering */
   align-items: center;     /* Horizontal centering */
+=======
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap");
+@import "./Styles/theme.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  min-height: calc(100vh - var(--header-height) - 180px);
+}
+
+/* Page not found */
+.pnf {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+  padding: 40px 20px;
+  animation: fadeInUp 0.6s var(--ease-out-expo) both;
+}
+
+.pnf-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 7rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-surface-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pnf-heading {
+  font-weight: normal;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.pnf-btn {
+  color: var(--color-text-inverse);
+  padding: 12px 28px;
+  background: var(--color-surface-dark);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.pnf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text-inverse);
+}
+
+.contacts {
+  margin: 0;
+  padding: 10px;
+  justify-content: start;
+}
+
+.col-md-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+>>>>>>> modified/main
   margin: 30px;
   text-align: center;
   margin-left: 120px;
 }
 
+<<<<<<< HEAD
 .register{
   display: flex;
   align-items: center;
@@ -123,11 +213,16 @@ for register page and login page styling  */
 }
 /* register page  */
 .form-container{
+=======
+/* Auth pages */
+.form-container {
+>>>>>>> modified/main
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 75vh;
   flex-direction: column;
+<<<<<<< HEAD
   background-color: #ffdee9;
   background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
 }
@@ -136,10 +231,27 @@ for register page and login page styling  */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 20px;
   background-color: #fff;
+=======
+  background: linear-gradient(160deg, #faf8f5 0%, #f0ebe3 40%, #e8dfd4 100%);
+  padding: 24px;
+  animation: fadeIn 0.5s var(--ease-out-expo) both;
+}
+
+.form-container form {
+  box-shadow: var(--shadow-lg);
+  padding: 32px 28px;
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  width: 100%;
+  max-width: 420px;
+  animation: scaleIn 0.5s var(--ease-out-expo) 0.1s both;
+>>>>>>> modified/main
 }
 
 .form-container form .title {
   text-align: center;
+<<<<<<< HEAD
   margin-bottom: 15px;
   font-weight: bold;
   font-family: "Playfair Display", serif;
@@ -173,3 +285,50 @@ for register page and login page styling  */
     #000000
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+=======
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.form-container form input {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-container form input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.form-container form button {
+  border: none;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-accent), #d46535);
+  color: white;
+  width: 100%;
+  padding: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-container form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(224, 122, 74, 0.35);
+}
+
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  flex-direction: column;
+}
+>>>>>>> modified/main

@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
+=======
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
+>>>>>>> modified/main
 import Layout from "./../components/layout/Layout";
 import "../Styles/Cartpage.css";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/Auth";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import DropIn from "braintree-web-drop-in-react";
+=======
+import dropin from "braintree-web-drop-in";
+>>>>>>> modified/main
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -14,6 +23,18 @@ const CartPage = () => {
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState(null);
   const [loading, setLoading] = useState(false);
+<<<<<<< HEAD
+=======
+  const [tokenLoading, setTokenLoading] = useState(false);
+  const [tokenError, setTokenError] = useState("");
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [dropInLoading, setDropInLoading] = useState(false);
+  const [dropInError, setDropInError] = useState("");
+  const [paymentError, setPaymentError] = useState("");
+  const dropInContainerRef = useRef(null);
+  const paymentDialogRef = useRef(null);
+  const makePaymentButtonRef = useRef(null);
+>>>>>>> modified/main
   const navigate = useNavigate();
 
   // TOTAL PRICE
@@ -36,6 +57,7 @@ const CartPage = () => {
   };
 
   // GET TOKEN
+<<<<<<< HEAD
   const getToken = async () => {
     try {
      const { data } = await axios.get(
@@ -63,12 +85,132 @@ const CartPage = () => {
       });
 
       setLoading(false);
+=======
+  const getToken = useCallback(async () => {
+    setTokenLoading(true);
+    setTokenError("");
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
+      );
+      if (!data?.clientToken) {
+        throw new Error("The payment provider did not return a client token.");
+      }
+      setClientToken(data.clientToken);
+    } catch (error) {
+      setTokenError(
+        error.response?.data?.message ||
+          error.message ||
+          "Unable to load payment options. Please try again."
+      );
+    } finally {
+      setTokenLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (auth?.token) getToken();
+    else {
+      setClientToken("");
+      setInstance(null);
+      setCheckoutOpen(false);
+    }
+  }, [auth?.token, getToken]);
+
+  useEffect(() => {
+    if (!checkoutOpen || !clientToken || !dropInContainerRef.current) return;
+
+    let active = true;
+    let dropInInstance;
+    setInstance(null);
+    setDropInError("");
+    setDropInLoading(true);
+
+    dropin
+      .create({
+        authorization: clientToken,
+        container: dropInContainerRef.current,
+        paymentOptionPriority: ["card"],
+      })
+      .then((createdInstance) => {
+        dropInInstance = createdInstance;
+        if (active) setInstance(createdInstance);
+        else return createdInstance.teardown();
+      })
+      .catch((error) => {
+        console.error("Braintree Drop-In initialization error:", error);
+        if (active) {
+          setDropInError(
+            error.message || "Unable to load card payment options."
+          );
+        }
+      })
+      .finally(() => {
+        if (active) setDropInLoading(false);
+      });
+
+    return () => {
+      active = false;
+      if (dropInInstance) {
+        dropInInstance.teardown().catch((error) => {
+          console.error("Braintree Drop-In teardown error:", error);
+        });
+      }
+    };
+  }, [checkoutOpen, clientToken]);
+
+  useEffect(() => {
+    if (!checkoutOpen) {
+      makePaymentButtonRef.current?.focus();
+      return;
+    }
+
+    paymentDialogRef.current?.focus();
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape" && !loading) setCheckoutOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [checkoutOpen, loading]);
+
+  const closePaymentDialog = () => {
+    if (!loading) setCheckoutOpen(false);
+  };
+
+  // PAYMENT
+  const handlePayment = async () => {
+    if (!instance) {
+      setPaymentError("Payment form is still loading. Please wait a moment.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setPaymentError("");
+      const { nonce } = await instance.requestPaymentMethod();
+
+      await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/product/braintree/payment`,
+        { nonce, cart }
+      );
+
+>>>>>>> modified/main
       localStorage.removeItem("cart");
       setCart([]);
       toast.success("Payment Successful");
       navigate("/dashboard/user/orders");
     } catch (error) {
+<<<<<<< HEAD
       console.log(error);
+=======
+      setPaymentError(
+        error.response?.data?.message ||
+          error.message ||
+          "Payment could not be completed. Please check your card details and try again."
+      );
+    } finally {
+>>>>>>> modified/main
       setLoading(false);
     }
   };
@@ -90,7 +232,11 @@ const CartPage = () => {
         </div>
 
         <div className="cart-main-container">
+<<<<<<< HEAD
           <div className="layout">
+=======
+          <div className="cart-layout">
+>>>>>>> modified/main
 
             {/* LEFT - ITEMS */}
             <div>
@@ -173,6 +319,7 @@ const CartPage = () => {
                 </button>
               )}
 
+<<<<<<< HEAD
               {clientToken && cart.length > 0 && (
                 <>
                   <div className="braintree-dropin-wrap">
@@ -189,6 +336,114 @@ const CartPage = () => {
                   >
                     {loading ? "Processing..." : "Make Payment"}
                   </button>
+=======
+              {auth?.token && auth?.user?.address && cart.length > 0 && (
+                <>
+                  <button
+                    ref={makePaymentButtonRef}
+                    className="btn-make-payment"
+                    onClick={() => {
+                      setInstance(null);
+                      setCheckoutOpen(true);
+                      setPaymentError("");
+                    }}
+                    aria-expanded={checkoutOpen}
+                    aria-haspopup="dialog"
+                  >
+                    Make Payment
+                  </button>
+
+                  {checkoutOpen && (
+                    createPortal(
+                      <div
+                        className="payment-dialog-backdrop"
+                        onMouseDown={(event) => {
+                          if (event.target === event.currentTarget) {
+                            closePaymentDialog();
+                          }
+                        }}
+                      >
+                        <section
+                          ref={paymentDialogRef}
+                          className="payment-dialog"
+                          role="dialog"
+                          aria-modal="true"
+                          aria-labelledby="payment-dialog-title"
+                          tabIndex={-1}
+                        >
+                          <button
+                            type="button"
+                            className="payment-dialog-close"
+                            onClick={closePaymentDialog}
+                            disabled={loading}
+                            aria-label="Cancel payment and close dialog"
+                          >
+                            &times;
+                          </button>
+                          <h2
+                            id="payment-dialog-title"
+                            className="payment-dialog-title"
+                          >
+                            Complete your payment
+                          </h2>
+                          <div className="braintree-dropin-wrap">
+                            <h3 className="payment-method-title">
+                              Card payment
+                            </h3>
+                            <p className="payment-method-description">
+                              Enter your card details securely below.
+                            </p>
+                            {tokenLoading && (
+                              <p role="status">
+                                Loading secure payment options...
+                              </p>
+                            )}
+                            {tokenError && (
+                              <div className="payment-error" role="alert">
+                                <p>{tokenError}</p>
+                                <button
+                                  type="button"
+                                  className="btn-payment-retry"
+                                  onClick={getToken}
+                                  disabled={tokenLoading}
+                                >
+                                  Try again
+                                </button>
+                              </div>
+                            )}
+                            {dropInLoading && (
+                              <p role="status">Loading card form...</p>
+                            )}
+                            {dropInError && (
+                              <p className="payment-error" role="alert">
+                                {dropInError}
+                              </p>
+                            )}
+                            {clientToken && (
+                              <>
+                                <div ref={dropInContainerRef} />
+                                {paymentError && (
+                                  <p className="payment-error" role="alert">
+                                    {paymentError}
+                                  </p>
+                                )}
+                                <button
+                                  type="button"
+                                  className="btn-make-payment"
+                                  onClick={handlePayment}
+                                  disabled={!instance || loading}
+                                >
+                                  {loading ? "Processing..." : "Pay securely"}
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </section>
+                      </div>,
+                      document.body
+                    )
+                  )}
+>>>>>>> modified/main
                 </>
               )}
             </div>
