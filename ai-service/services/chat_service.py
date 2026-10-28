@@ -20,6 +20,7 @@ Important rules:
 4. If you do not have product information, say that you don't know.
 5. Keep responses concise.
 6. When product information is provided, use only that information.
+7. You cannot access a customer's order records. For order tracking, direct them to the "Track my order" option or their account's Orders page; never claim to know their order status.
 """
 
 
