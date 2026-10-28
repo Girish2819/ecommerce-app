@@ -1,30 +1,21 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-=======
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
->>>>>>> modified/main
 import Layout from "./../components/layout/Layout";
 import "../Styles/Cartpage.css";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/Auth";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import DropIn from "braintree-web-drop-in-react";
-=======
 import dropin from "braintree-web-drop-in";
->>>>>>> modified/main
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const CartPage = () => {
   const [auth] = useAuth();
   const [cart, setCart] = useCart();
+  const navigate = useNavigate();
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState(null);
   const [loading, setLoading] = useState(false);
-<<<<<<< HEAD
-=======
   const [tokenLoading, setTokenLoading] = useState(false);
   const [tokenError, setTokenError] = useState("");
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -34,58 +25,16 @@ const CartPage = () => {
   const dropInContainerRef = useRef(null);
   const paymentDialogRef = useRef(null);
   const makePaymentButtonRef = useRef(null);
->>>>>>> modified/main
-  const navigate = useNavigate();
 
-  // TOTAL PRICE
-  const totalPrice = () => {
-    let total = 0;
-    cart?.forEach((item) => (total += item.price));
-    return total.toLocaleString("en-IN", {
-      style: "currency",
-      currency: "INR",
-    });
+  const removeCartItem = (productId) => {
+    const updatedCart = cart.filter((item) => item._id !== productId);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  // REMOVE ITEM
-  const removeCartItem = (pid) => {
-    let myCart = [...cart];
-    let index = myCart.findIndex((item) => item._id === pid);
-    myCart.splice(index, 1);
-    setCart(myCart);
-    localStorage.setItem("cart", JSON.stringify(myCart));
-  };
+  const totalPrice = () =>
+    cart.reduce((total, item) => total + Number(item.price || 0), 0);
 
-  // GET TOKEN
-<<<<<<< HEAD
-  const getToken = async () => {
-    try {
-     const { data } = await axios.get(
-  `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
-);
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      toast.error("Failed to load payment token");
-    }
-  };
-
-  useEffect(() => {
-    if (auth?.token) getToken();
-  }, [auth?.token]);
-
-  // PAYMENT
-  const handlePayment = async () => {
-    try {
-      setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
-
-      await axios.post("/api/v1/product/braintree/payment", {
-        nonce,
-        cart,
-      });
-
-      setLoading(false);
-=======
   const getToken = useCallback(async () => {
     setTokenLoading(true);
     setTokenError("");
@@ -195,22 +144,17 @@ const CartPage = () => {
         { nonce, cart }
       );
 
->>>>>>> modified/main
       localStorage.removeItem("cart");
       setCart([]);
       toast.success("Payment Successful");
       navigate("/dashboard/user/orders");
     } catch (error) {
-<<<<<<< HEAD
-      console.log(error);
-=======
       setPaymentError(
         error.response?.data?.message ||
           error.message ||
           "Payment could not be completed. Please check your card details and try again."
       );
     } finally {
->>>>>>> modified/main
       setLoading(false);
     }
   };
@@ -232,11 +176,7 @@ const CartPage = () => {
         </div>
 
         <div className="cart-main-container">
-<<<<<<< HEAD
-          <div className="layout">
-=======
           <div className="cart-layout">
->>>>>>> modified/main
 
             {/* LEFT - ITEMS */}
             <div>
@@ -319,24 +259,6 @@ const CartPage = () => {
                 </button>
               )}
 
-<<<<<<< HEAD
-              {clientToken && cart.length > 0 && (
-                <>
-                  <div className="braintree-dropin-wrap">
-                    <DropIn
-                      options={{ authorization: clientToken }}
-                      onInstance={(instance) => setInstance(instance)}
-                    />
-                  </div>
-
-                  <button
-                    className="btn-make-payment"
-                    onClick={handlePayment}
-                    disabled={!instance || loading}
-                  >
-                    {loading ? "Processing..." : "Make Payment"}
-                  </button>
-=======
               {auth?.token && auth?.user?.address && cart.length > 0 && (
                 <>
                   <button
@@ -443,7 +365,6 @@ const CartPage = () => {
                       document.body
                     )
                   )}
->>>>>>> modified/main
                 </>
               )}
             </div>

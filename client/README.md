@@ -1,7 +1,5 @@
 # Getting Started with Create React App
 
-<<<<<<< HEAD
-=======
 ## AI assistant
 
 The chat widget uses the AI service endpoint at `/api/ai/chat`. In development,
@@ -14,7 +12,6 @@ It appends `/api/ai/chat` automatically. Also configure the AI service's
 policy allows the request. Rebuild and redeploy the frontend after changing
 `REACT_APP_AI_API`.
 
->>>>>>> modified/main
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

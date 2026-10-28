@@ -8,30 +8,6 @@ const Categories = () => {
   const categories = useCategory();
 
   return (
-<<<<<<< HEAD
-    <Layout title={"All Categories"}>
-      <div className="categories-page">
-        <h2>All Categories</h2>
-
-        <div className="categories-grid">
-          {(categories || []).map((c) => (
-            <Link
-              key={c._id}
-              to={`/category/${c.slug}`}
-              className="category-card"
-            >
-              {/* Dummy Image */}
-              <img
-                src={`https://via.placeholder.com/300x200?text=${c.name}`}
-                alt={c.name}
-              />
-
-              <div className="category-name">
-                <h4>{c.name}</h4>
-              </div>
-            </Link>
-          ))}
-=======
     <Layout title="All Categories — LuxeMart">
       <div className="categories-page">
         <div className="page-hero categories-hero">
@@ -61,15 +37,10 @@ const Categories = () => {
               </Link>
             ))}
           </div>
->>>>>>> modified/main
         </div>
       </div>
     </Layout>
   );
 };
 
-<<<<<<< HEAD
 export default Categories;
-=======
-export default Categories;
->>>>>>> modified/main

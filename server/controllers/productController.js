@@ -1,10 +1,7 @@
 import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
 import orderModel from "../models/orderModel.js";
-<<<<<<< HEAD
-=======
 import mongoose from "mongoose";
->>>>>>> modified/main
 
 import fs from "fs";
 import slugify from "slugify";
@@ -336,15 +333,6 @@ export const braintreeTokenController = async (req, res) => {
   try {
     gateway.clientToken.generate({}, function (err, response) {
       if (err) {
-<<<<<<< HEAD
-        res.status(500).send(err);
-      } else {
-        res.send(response);
-      }
-    });
-  } catch (error) {
-    console.log(error);
-=======
         console.error("Braintree client token error:", err);
         res.status(500).send({
           success: false,
@@ -360,7 +348,6 @@ export const braintreeTokenController = async (req, res) => {
       success: false,
       message: "Unable to initialize payment. Please try again.",
     });
->>>>>>> modified/main
   }
 };
 
@@ -368,35 +355,6 @@ export const braintreeTokenController = async (req, res) => {
 export const brainTreePaymentController = async (req, res) => {
   try {
     const { nonce, cart } = req.body;
-<<<<<<< HEAD
-    let total = 0;
-    cart.map((i) => {
-      total += i.price;
-    });
-    let newTransaction = gateway.transaction.sale(
-      {
-        amount: total,
-        paymentMethodNonce: nonce,
-        options: {
-          submitForSettlement: true,
-        },
-      },
-      function (error, result) {
-        if (result) {
-          const order = new orderModel({
-            products: cart,
-            payment: result,
-            buyer: req.user?.id,
-          }).save();
-          res.json({ ok: true });
-        } else {
-          res.status(500).send(error);
-        }
-      }
-    );
-  } catch (error) {
-    console.log(error);
-=======
     if (
       typeof nonce !== "string" ||
       !nonce ||
@@ -477,6 +435,5 @@ export const brainTreePaymentController = async (req, res) => {
       success: false,
       message: "Unable to complete payment. Please try again.",
     });
->>>>>>> modified/main
   }
 };
