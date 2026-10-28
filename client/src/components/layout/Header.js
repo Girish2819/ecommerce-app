@@ -7,6 +7,7 @@ import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 import axios from "axios";
+import "./Header.css";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
