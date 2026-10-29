@@ -20,7 +20,10 @@ const Register = () => {
   const handleSubmit= async(e)=>{
     e.preventDefault();
     try{
-        const res = await axios.post('/api/v1/auth/register',{name,email,phone,address,password,answer});
+        const res = await axios.post(
+          `${process.env.REACT_APP_API}/api/v1/auth/register`,
+          { name, email, phone, address, password, answer }
+        );
       if(res && res.data.success){
         toast.success(res.data.message);
         navigate('/login'); // Navigate to login page on successful registration
@@ -28,8 +31,10 @@ const Register = () => {
         toast.error(res.data.message);
       }
     }catch(error){
-      console.log(error);
-      toast.error("Something went wrong, please try again later.");
+      toast.error(
+        error.response?.data?.message ||
+          "Unable to connect to the registration service. Please try again."
+      );
     }
   }
 
